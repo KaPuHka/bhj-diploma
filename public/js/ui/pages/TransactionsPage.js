@@ -45,6 +45,7 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
+    // confirm();
     Account.remove({ id: this.lastOptions.account_id}, (err, resp) => {
       if (resp?.success) {
         App.updateWidgets();
@@ -62,7 +63,12 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-
+    // confirm() ???
+      Transaction.remove({id: id}, (err, resp) => {
+        if (resp?.success) {
+          App.update();
+        }
+      });
   }
 
   /**
@@ -73,18 +79,20 @@ class TransactionsPage {
    * */
   render(options){
     // Если объект options не передан, метод не должен работать.
-    this.lastOptions = options;
-    Account.get(options.account_id, (err, resp) => {
-      if (resp) {
-        this.renderTitle(resp.data.name);
-      }
-    });
-
-    Transaction.list({account_id:options.account_id}, (err, resp) => { 
-      if (resp?.data) {
-        this.renderTransactions(resp.data);
-      } 
-    });
+    if (options){
+      this.lastOptions = options;
+      this.clear();
+      Account.get(options.account_id, (err, resp) => {
+        if (resp?.data) {
+          this.renderTitle(resp.data.name);
+        }
+      });
+      Transaction.list({account_id:options.account_id}, (err, resp) => { 
+        if (resp?.data) {
+          this.renderTransactions(resp.data);
+        } 
+      });
+    }
   }
 
   /**
@@ -110,7 +118,7 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
-    return date; // !!!XXX
+    return date; 
   }
 
   /**
@@ -119,7 +127,7 @@ class TransactionsPage {
    * */
   getTransactionHTML(item){
     let timeAndData = this.formatDate(item.created_at);
-    return `<div class="transaction transaction_`+item.type +` row">
+    return `<div class="transaction transaction_`+item.type +` row" id="transact-`+item.id+`">
     <div class="col-md-7 transaction__details">
       <div class="transaction__icon">
           <span class="fa fa-money fa-2x"></span>
@@ -136,11 +144,7 @@ class TransactionsPage {
           `+item.sum+` <span class="currency">₽</span>
       </div>
     </div>
-    <div class="col-md-2 transaction__controls">
-        <!-- в data-id нужно поместить id -->
-        <button class="btn btn-danger transaction__remove" data-id="`+item.id+`">
-            <i class="fa fa-trash"></i>  
-        </button>
+    <div class="col-md-2 transaction__controls" id="t-`+item.id+`">
     </div>
 </div>`;
   }
@@ -150,8 +154,31 @@ class TransactionsPage {
    * используя getTransactionHTML
    * */
   renderTransactions(data){
-    data.forEach(transact => {
-      this.element.insertAdjacentHTML('beforeend', this.getTransactionHTML(transact));
-    })
+    if (data.length){
+      data.forEach(transact => {
+        if (document.getElementById('transact-'+transact.id) === null){
+          this.element.insertAdjacentHTML('beforeend', this.getTransactionHTML(transact));
+          // append button with addEventListener
+          let me = document.getElementById('t-'+transact.id);
+    
+          if (me.querySelector('button') === null){
+            let btn = document.createElement('button');
+            btn.setAttribute("class", "btn btn-danger transaction__remove");
+            btn.setAttribute("data-id", transact.id);
+            btn.addEventListener('click', (e) => {
+              e.preventDefault();
+              this.removeTransaction(transact.id);
+            })
+            let i = document.createElement('i');
+            i.setAttribute("class", "fa fa-trash");
+            btn.appendChild(i);
+            me.appendChild(btn);
+          }
+        }
+      })
+    } else {
+      this.element.querySelectorAll('.transaction').forEach(el => el.remove());
+    }
+    
   }
 }
