@@ -23,11 +23,14 @@ class CreateTransactionForm extends AsyncForm {
         if (resp?.data) {
           document.querySelectorAll('.accounts-select').forEach(list => {
             resp.data.forEach(option => {
-              // <option value="${id}">${name}</option> 
-              let op = document.createElement('option');
-              op.setAttribute('value', option.id);
-              op.textContent = option.name;
-              list.appendChild(op);
+              if(document.getElementById('o-'+ option.id) === null) {
+                // <option value="${id}">${name}</option> 
+                let op = document.createElement('option');
+                op.setAttribute('value', option.id);
+                op.setAttribute('id', 'o-'+ option.id);
+                op.textContent = option.name;
+                list.appendChild(op);
+              }
             })
           })   
         }
