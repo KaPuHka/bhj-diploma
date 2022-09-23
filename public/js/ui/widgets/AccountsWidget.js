@@ -14,7 +14,10 @@ class AccountsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-
+    this.element = element;
+    this.registerEvents();
+    this.update();
+    
   }
 
   /**
@@ -25,6 +28,14 @@ class AccountsWidget {
    * вызывает AccountsWidget.onSelectAccount()
    * */
   registerEvents() {
+    const acntnew = document.getElementById('modal-new-account');
+    Array.from(document.getElementsByClassName('pull-right')).forEach(btn => {
+      btn.onclick = e => {
+        e.preventDefault();
+        new Modal(acntnew).open();
+      }
+    });  
+
 
   }
 
@@ -39,7 +50,17 @@ class AccountsWidget {
    * метода renderItem()
    * */
   update() {
-
+    let user = User.current();
+    if (user?.id) {
+      Account.list(null, (err, resp) => {
+        if (resp?.success) {
+          this.clear();
+          resp.data.forEach(element => { 
+            this.renderItem(element);
+          });
+        }
+      })
+    }
   }
 
   /**
@@ -48,7 +69,7 @@ class AccountsWidget {
    * в боковой колонке
    * */
   clear() {
-
+    this.element.querySelectorAll('.account').forEach(el => el.remove());
   }
 
   /**
@@ -59,7 +80,10 @@ class AccountsWidget {
    * Вызывает App.showPage( 'transactions', { account_id: id_счёта });
    * */
   onSelectAccount( element ) {
-
+    this.element.querySelectorAll('.account').forEach( el => el.classList.remove('active'));
+    element.classList.add('active');
+    let data_id = element.getAttribute('data-id');
+    App.showPage( 'transactions', { account_id: data_id });
   }
 
   /**
@@ -68,7 +92,18 @@ class AccountsWidget {
    * item - объект с данными о счёте
    * */
   getAccountHTML(item){
-
+    let li = document.createElement('li');
+    li.setAttribute("class", "account");
+    li.setAttribute("data-id", item.id);
+    li.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.onSelectAccount(li);
+    })
+    let a = document.createElement('a');
+    a.setAttribute("href","#");
+    a.textContent = item.name + '  ' + item.sum;
+    li.appendChild(a);
+    return li; 
   }
 
   /**
@@ -78,6 +113,6 @@ class AccountsWidget {
    * и добавляет его внутрь элемента виджета
    * */
   renderItem(data){
-
+    document.getElementsByClassName('accounts-panel')[0].appendChild(this.getAccountHTML(data)); 
   }
 }

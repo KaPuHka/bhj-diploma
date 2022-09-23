@@ -12,7 +12,8 @@ class UserWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor(element){
-
+    this.element = element;
+    this.update();
   }
 
   /**
@@ -23,6 +24,13 @@ class UserWidget {
    * авторизованного пользователя
    * */
   update(){
-
+    let user = User.current();
+    if ( user?.name) {
+      Array.from(document.getElementsByClassName('user-name'))[0].innerText = user.name;
+    } else if (user) {
+      // no name
+      Array.from(document.getElementsByClassName('user-name'))[0].innerText = '';
+    }
+    
   }
 }
