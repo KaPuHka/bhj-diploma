@@ -45,15 +45,16 @@ class TransactionsPage {
    * для обновления приложения
    * */
   removeAccount() {
-    // confirm();
-    Account.remove({ id: this.lastOptions.account_id}, (err, resp) => {
-      if (resp?.success) {
-        App.updateWidgets();
-        App.updateForms();
-        this.clear();
-      }
-    });
-    this.clear();
+    if (window.confirm('Вы действительно хотите удалить счёт? Это действие будет не отменить')){
+      Account.remove({ id: this.lastOptions.account_id}, (err, resp) => {
+        if (resp?.success) {
+          App.updateWidgets();
+          App.updateForms();
+          this.clear();
+        }
+      });
+      this.clear();
+    };
   }
 
   /**
@@ -63,12 +64,13 @@ class TransactionsPage {
    * либо обновляйте текущую страницу (метод update) и виджет со счетами
    * */
   removeTransaction( id ) {
-    // confirm() ???
+    if (window.confirm('Вы действительно хотите удалить транзакцию? Это действие будет не отменить')){
       Transaction.remove({id: id}, (err, resp) => {
         if (resp?.success) {
           App.update();
         }
       });
+    }
   }
 
   /**
@@ -80,8 +82,8 @@ class TransactionsPage {
   render(options){
     // Если объект options не передан, метод не должен работать.
     if (options){
-      this.lastOptions = options;
       this.clear();
+      this.lastOptions = options;
       Account.get(options.account_id, (err, resp) => {
         if (resp?.data) {
           this.renderTitle(resp.data.name);
@@ -118,7 +120,20 @@ class TransactionsPage {
    * в формат «10 марта 2019 г. в 03:20»
    * */
   formatDate(date){
-    return date; 
+    let d = new Date(date),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear(),
+    hour = d.getHours(),
+    min = d.getMinutes();
+
+    if (month.length < 2) 
+      month = '0' + month;
+
+    if (min < 10) 
+        min = '0' + min;
+
+    return day +'.'+month + ' '+year + ' г. в '+ hour+':' +min; 
   }
 
   /**

@@ -1,0 +1,234 @@
+{
+  "users": [
+    {
+      "name": "demo",
+      "email": "demo@demo",
+      "password": "demo",
+      "id": "1"
+    },
+    {
+      "name": "Tanja",
+      "email": "xx@mail.ru",
+      "password": "xx",
+      "id": "eltq4q99ml8cmdddg"
+    },
+    {
+      "name": "Jurij",
+      "email": "yy@mail.ru",
+      "password": "yy",
+      "id": "eltq4q7tcl8dczh39"
+    },
+    {
+      "name": "Petr",
+      "email": "zz@mail.ru",
+      "password": "sewq",
+      "id": "eltq4qxm9l8ewvwaz"
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Магазин",
+      "user_id": "1",
+      "id": "2"
+    },
+    {
+      "name": "Бизнес",
+      "user_id": "1",
+      "id": "3"
+    },
+    {
+      "name": "Riga",
+      "user_id": "1",
+      "id": "eltq4qvtgl8evpxvs"
+    },
+    {
+      "name": "Airport",
+      "user_id": "1",
+      "id": "eltq4qvybl8evreno"
+    },
+    {
+      "name": "Check",
+      "user_id": "1",
+      "id": "eltq4qw7hl8evxhpi"
+    },
+    {
+      "name": "shop",
+      "user_id": "eltq4qxm9l8ewvwaz",
+      "id": "eltq4qy8ol8ex22ob"
+    },
+    {
+      "name": "trip",
+      "user_id": "eltq4qxm9l8ewvwaz",
+      "id": "eltq4qygnl8ex66gg"
+    },
+    {
+      "name": "check",
+      "user_id": "eltq4q99ml8cmdddg",
+      "id": "4fi4gdccl910s8om"
+    }
+  ],
+  "transactions": [
+    {
+      "account_id": "2",
+      "created_at": "2019-09-25 15:03:02",
+      "id": "5",
+      "name": "Фрукты",
+      "sum": 250,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-25 15:03:02",
+      "id": "17",
+      "name": "Овощи",
+      "sum": 300,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-26 14:47:02",
+      "id": "6",
+      "name": "Мясо",
+      "sum": 600,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "2",
+      "created_at": "2019-09-27 13:27:02",
+      "id": "7",
+      "name": "Долг в банк",
+      "sum": 5000,
+      "type": "expense",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2017-10-15 13:27:02",
+      "id": "9",
+      "name": "На банду",
+      "sum": 15000,
+      "type": "expense",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2017-09-17 13:27:02",
+      "id": "10",
+      "name": "На стволы",
+      "sum": 6000,
+      "type": "expense",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2017-12-27 13:27:02",
+      "id": "11",
+      "name": "Прибыль с банка",
+      "sum": 1500000,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2018-01-15 13:27:02",
+      "id": "12",
+      "name": "Прибыль с магазина",
+      "sum": 300000,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2018-01-15 13:27:02",
+      "id": "13",
+      "name": "Подарок сизого",
+      "sum": 20000,
+      "type": "income",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2017-09-15 13:27:02",
+      "id": "14",
+      "name": "На охрану",
+      "sum": 60000,
+      "type": "expense",
+      "user_id": "1"
+    },
+    {
+      "account_id": "3",
+      "created_at": "2017-10-15 13:27:02",
+      "id": "15",
+      "name": "На бумер",
+      "sum": 300000,
+      "type": "expense",
+      "user_id": "1"
+    },
+    {
+      "id": "eltq4q13ctl8f1a96r",
+      "type": "income",
+      "name": "hotel",
+      "sum": 25,
+      "account_id": "eltq4qvtgl8evpxvs",
+      "user_id": "1",
+      "created_at": "2022-09-23T22:07:35.426Z"
+    },
+    {
+      "id": "eltq4q14gol8f26n22",
+      "type": "expense",
+      "name": "hotel",
+      "sum": 278,
+      "account_id": "2",
+      "user_id": "1",
+      "created_at": "2022-09-23T22:32:46.393Z"
+    },
+    {
+      "id": "eltq4q14gol8f279jr",
+      "type": "income",
+      "name": "taxi",
+      "sum": 35,
+      "account_id": "eltq4qvybl8evreno",
+      "user_id": "1",
+      "created_at": "2022-09-23T22:33:15.543Z"
+    },
+    {
+      "id": "eltq4qa8ml930t21n",
+      "type": "expense",
+      "name": "airbnb",
+      "sum": 2500,
+      "account_id": "4fi4gdccl910rvcx",
+      "user_id": "eltq4q99ml8cmdddg",
+      "created_at": "2022-10-10T17:00:41.242Z"
+    },
+    {
+      "id": "eltq4qacbl930tslo",
+      "type": "expense",
+      "name": "Sveta",
+      "sum": 22,
+      "account_id": "4fi4gdccl910s8om",
+      "user_id": "eltq4q99ml8cmdddg",
+      "created_at": "2022-10-10T17:01:15.659Z"
+    },
+    {
+      "id": "eltq4qaeql930ux1d",
+      "type": "income",
+      "name": "adrf",
+      "sum": 100,
+      "account_id": "4fi4gdccl910s8om",
+      "user_id": "eltq4q99ml8cmdddg",
+      "created_at": "2022-10-10T17:02:08.064Z"
+    },
+    {
+      "id": "eltq4qahnl930vz6p",
+      "type": "income",
+      "name": "shop",
+      "sum": 123,
+      "account_id": "4fi4gdccl910s8om",
+      "user_id": "eltq4q99ml8cmdddg",
+      "created_at": "2022-10-10T17:02:57.504Z"
+    }
+  ]
+}
